@@ -28,6 +28,21 @@ var albumPicasso = {
      ]
  };
 
+ var albumComedy = {
+     name: '[Jedi Mind Trick] This is Funny. You Will Laugh Now.',
+     artist: 'Tom Massa',
+     label: 'Self-Published',
+     year: '2015',
+     albumArtUrl: 'assets/images/album-covers/16.png',
+     songs: [
+         { name: 'On Housecleaning with Children', length: '5:01' },
+         { name: 'On the Preferred Drugs of Pets', length: '10:17' },
+         { name: 'On Procrastination', length: '3:15'},
+         { name: 'On Direct Sales Gimmicks', length: '20:35' },
+         { name: 'On Life Lessons from Fairy Tales', length: '14:33'}
+     ]
+ };
+
 var createSongRow = function(songNumber, songName, songLength) {
     var template = 
         '<tr class="album-view-song-item">'
@@ -40,12 +55,13 @@ var createSongRow = function(songNumber, songName, songLength) {
     return template;
 };
 
-var setCurrentAlbum = function(album) {
     var albumTitle = document.getElementsByClassName('album-view-title')[0];
-     var albumArtist = document.getElementsByClassName('album-view-artist')[0];
-     var albumReleaseInfo = document.getElementsByClassName('album-view-release-info')[0];
-     var albumImage = document.getElementsByClassName('album-cover-art')[0];
-     var albumSongList = document.getElementsByClassName('album-view-song-list')[0];
+    var albumArtist = document.getElementsByClassName('album-view-artist')[0];
+    var albumReleaseInfo = document.getElementsByClassName('album-view-release-info')[0];
+    var albumImage = document.getElementsByClassName('album-cover-art')[0];
+    var albumSongList = document.getElementsByClassName('album-view-song-list')[0];
+    
+    var setCurrentAlbum = function(album) {
  
      albumTitle.firstChild.nodeValue = album.name;
      albumArtist.firstChild.nodeValue = album.artist;
@@ -61,4 +77,14 @@ var setCurrentAlbum = function(album) {
  
  window.onload = function() {
      setCurrentAlbum(albumPicasso);
+     
+     var albums = [albumPicasso, albumMarconi, albumComedy];
+     var index = 1;
+     albumImage.addEventListener("click", function(event) {
+         setCurrentAlbum(albums[index]);
+         index++;
+         if (index == albums.length) {
+             index = 0;
+         }
+     });
 };
